@@ -17,6 +17,7 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.IDocument;
+import org.johnstonshome.jenatool.ui.preferences.Preferences;
 import org.johnstonshome.jenatool.ui.views.SparqlResultsView;
 
 import com.hp.hpl.jena.query.Dataset;
@@ -59,6 +60,7 @@ public class SparqlRunner {
 		builder.append("\n");
 //		builder.append(query);
 		
+		Preferences prefs = new Preferences();
 		Connection conn = Connections.getDefaultConnection();
 		Dataset dataset = null;
 					
@@ -97,14 +99,14 @@ public class SparqlRunner {
 				if (model.isEmpty()) {
 					baos.write("No results.\n".getBytes());
 				} else {
-					model.write(baos, "N3", "");
+					model.write(baos, prefs.getDefaultRdfForm(), "");
 				}
 			} else if (parsed.isConstructType()) {
 				Model model = qe.execConstruct();
 				if (model.isEmpty()) {
 					baos.write("No results.\n".getBytes());
 				} else {
-					model.write(baos, "N3", "");
+					model.write(baos, prefs.getDefaultRdfForm(), "");
 				}
 			} else if (parsed.isAskType()) {
 				boolean result = qe.execAsk();

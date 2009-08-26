@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.johnstonshome.jenatool.ui.preferences.Preferences;
 
 public class NewConnectionWizardPage extends WizardPage {
 	
@@ -58,11 +59,12 @@ public class NewConnectionWizardPage extends WizardPage {
 			}
 		});
 		
+		Preferences prefs = new Preferences();
 		label = new Label(container, SWT.NULL);
 		label.setText("");
 		union = new Button(container, SWT.CHECK);
 		union.setText("Use union-default-graph setting");
-		union.setSelection(true);
+		union.setSelection(prefs.isUseDefaultGraph());
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		union.setLayoutData(gd);
 		
