@@ -19,18 +19,25 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.johnstonshome.jenatool.internal.Connection;
 import org.johnstonshome.jenatool.ui.preferences.Preferences;
 
 public class NewConnectionWizardPage extends WizardPage {
 	
+	private Connection connection = null;
 	private Combo type;
 	private Text  location;
 	private Button union;
 
-	public NewConnectionWizardPage() {
+	public NewConnectionWizardPage(Connection connection) {
 		super("Jena Connection");
+		this.connection = connection;
 		setTitle("Jena Connection");
-		setDescription("Create a new Jena connection object.");
+		if (connection == null) {
+			setDescription("Create a new Jena connection object.");
+		} else {
+			setDescription("Edit Jena connection object.");
+		}
 	}
 	
 	public void createControl(Composite parent) {
@@ -45,12 +52,18 @@ public class NewConnectionWizardPage extends WizardPage {
 		type = new Combo(container, SWT.BORDER | SWT.SINGLE | SWT.DROP_DOWN | SWT.READ_ONLY);
 		type.add("TDB", 0);
 		type.select(0);
+		if (connection != null) {
+			type.setEnabled(false);
+		}
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		type.setLayoutData(gd);
 
 		label = new Label(container, SWT.NULL);
 		label.setText("&Dataset Location:");
 		location = new Text(container, SWT.BORDER | SWT.SINGLE);
+		if (connection != null) {
+			location.setEnabled(false);
+		}
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		location.setLayoutData(gd);
 		location.addModifyListener(new ModifyListener() {
@@ -67,6 +80,12 @@ public class NewConnectionWizardPage extends WizardPage {
 		union.setSelection(prefs.isUseDefaultGraph());
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		union.setLayoutData(gd);
+		
+		if (connection != null) {
+	    	type.setText(connection.getType().toString());
+	    	location.setText(connection.getUrl());
+	    	union.setSelection(connection.isUnion());
+		}
 		
 		setControl(container);
 	}
@@ -95,5 +114,4 @@ public class NewConnectionWizardPage extends WizardPage {
 	public boolean isUnion() {
 		return union.getSelection();
 	}
-
 }

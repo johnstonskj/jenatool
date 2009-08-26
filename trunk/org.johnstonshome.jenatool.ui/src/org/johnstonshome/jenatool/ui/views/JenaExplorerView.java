@@ -73,6 +73,7 @@ public class JenaExplorerView extends ViewPart {
 	private Action defaultConnectionAction;
 	private Action doubleClickAction;
 	
+	private TreeParent connectionFolder = null;
 	private TreeObject selected = null;
 
 	/*
@@ -175,20 +176,16 @@ public class JenaExplorerView extends ViewPart {
 				return ((TreeParent)parent).hasChildren();
 			return false;
 		}
-/*
- * We will set up a dummy model to initialize tree heararchy.
- * In a real code, you will connect to a real model and
- * expose its hierarchy.
- */
+		
 		private void initialize() {			
-			TreeParent root = new TreeParent("Jena Connections");
+			connectionFolder = new TreeParent("Jena Connections");
 			for (Connection connection : Connections.getConnections()) {
 				TreeObject obj = new ConnectionTreeObject(connection);
-				root.addChild(obj);
+				connectionFolder.addChild(obj);
 			}
 			
 			invisibleRoot = new TreeParent("");
-			invisibleRoot.addChild(root);
+			invisibleRoot.addChild(connectionFolder);
 		}
 	}
 	
@@ -210,6 +207,7 @@ public class JenaExplorerView extends ViewPart {
 			}
 		}
 	}
+	
 	class NameSorter extends ViewerSorter {
 	}
 
@@ -245,6 +243,11 @@ public class JenaExplorerView extends ViewPart {
 		    	  }
 		      }
 		});
+		
+		/*
+		 * This is enough to show all the contents of the connection folder.
+		 */
+		viewer.expandToLevel(4);
 
 		// Create the help context id for the viewer's control
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "org.johnstonshome.jenatool.ui.viewer");
@@ -300,7 +303,7 @@ public class JenaExplorerView extends ViewPart {
 	private void makeActions() {
 		addConnectionAction = new Action() {
 			public void run() {
-		        NewConnectionWizard wizard = new NewConnectionWizard();
+		        NewConnectionWizard wizard = new NewConnectionWizard(null);
 		        WizardDialog dialog = new WizardDialog(viewer.getControl().getShell(), wizard);
 		        try {
 		        	wizard.init(Activator.getDefault().getWorkbench(), (IStructuredSelection)null);
@@ -310,6 +313,9 @@ public class JenaExplorerView extends ViewPart {
 	        		Connection conn = wizard.getConnection();
 		        	if (conn != null) {
 		        		Connections.add(conn);
+						TreeObject obj = new ConnectionTreeObject(conn);
+						connectionFolder.addChild(obj);
+						viewer.refresh();
 		        	}
 		        } catch (Throwable t) {
 		        	t.printStackTrace();
@@ -328,6 +334,7 @@ public class JenaExplorerView extends ViewPart {
 						"Are you sure you want to delete the connection '" + selected.toString() + "'?");
 				if (yes) {
 					Connections.remove(((ConnectionTreeObject)selected).getConnection());
+					selected.getParent().removeChild(selected);
 					viewer.remove(selected);
 					viewer.refresh();
 				}
@@ -353,8 +360,19 @@ public class JenaExplorerView extends ViewPart {
 		doubleClickAction = new Action() {
 			public void run() {
 				ISelection selection = viewer.getSelection();
-				Object obj = ((IStructuredSelection)selection).getFirstElement();
-				showMessage("Double-click detected on "+obj.toString());
+				ConnectionTreeObject obj = (ConnectionTreeObject) ((IStructuredSelection)selection).getFirstElement();
+				
+		        NewConnectionWizard wizard = new NewConnectionWizard(obj.getConnection());
+		        WizardDialog dialog = new WizardDialog(viewer.getControl().getShell(), wizard);
+		        try {
+		        	wizard.init(Activator.getDefault().getWorkbench(), (IStructuredSelection)null);
+		        	dialog.create();
+		        	dialog.open();
+		        	
+					viewer.refresh(true);
+		        } catch (Throwable t) {
+		        	t.printStackTrace();
+		        }
 			}
 		};
 	}
@@ -365,12 +383,6 @@ public class JenaExplorerView extends ViewPart {
 				doubleClickAction.run();
 			}
 		});
-	}
-	private void showMessage(String message) {
-		MessageDialog.openInformation(
-			viewer.getControl().getShell(),
-			"Jena Explorer",
-			message);
 	}
 
 	/**
