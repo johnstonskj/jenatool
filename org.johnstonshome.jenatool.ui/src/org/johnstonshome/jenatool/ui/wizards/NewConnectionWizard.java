@@ -21,10 +21,11 @@ import org.johnstonshome.jenatool.ui.Activator;
 public class NewConnectionWizard extends Wizard {
 	
 	private NewConnectionWizardPage mainPage = null;
-	private Connection newConnection = null;
+	private Connection connection = null;
 
-	public NewConnectionWizard() {
+	public NewConnectionWizard(Connection connection) {
 		super();
+		this.connection = connection;
 		setDefaultPageImageDescriptor(Activator.getImageDescriptor("icons/jena-logo-small.png"));
 	}
 	
@@ -50,17 +51,26 @@ public class NewConnectionWizard extends Wizard {
 		if (ok) {
 			ConnectionType type = ConnectionType.valueOf(ConnectionType.class, mainPage.getType());
 			boolean union = mainPage.isUnion();
-			newConnection = new Connection(type, location);
-			newConnection.setUnion(union);
+			if (connection == null) {
+				connection = new Connection(type, location);
+			} else {
+				connection.setType(type);
+				connection.setUrl(location);
+			}
+			connection.setUnion(union);
 		}
 		
 		return ok;
 	}
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		setWindowTitle("New Jena Connection Wizard");
+		if (connection == null) {
+			setWindowTitle("New Jena Connection Wizard"); 
+		} else {
+			setWindowTitle("Edit Jena Connection"); 
+		}
 		setNeedsProgressMonitor(true);
-		mainPage = new NewConnectionWizardPage();
+		mainPage = new NewConnectionWizardPage(connection);
 	}
 	
     public void addPages() {
@@ -69,6 +79,6 @@ public class NewConnectionWizard extends Wizard {
     }
     
     public Connection getConnection() {
-    	return this.newConnection;
+    	return this.connection;
     }
 }
