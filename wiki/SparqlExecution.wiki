@@ -1,0 +1,6 @@
+#summary Describes the actions for executing SPARQL queries.
+#labels Phase-Requirements,Feature
+
+= Introduction =
+
+TBD
