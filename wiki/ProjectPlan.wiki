@@ -16,6 +16,11 @@ The aim is to complete the vision for the tool as it stands today, this includes
   * Support for Jena's code generation from OWL vocabularies.
   * Pellet integration into query execution, as an option.
 
+== Release 0.9.2 (planned) ==
+
+*Theme*
+This is aimed as a usability release, additional features and specifically those aimed at streamlining common user actions and existing features will be included here. 
+
 == Release 0.9.1 (planned) ==
 
 *Theme*
