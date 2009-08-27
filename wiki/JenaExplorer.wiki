@@ -3,4 +3,4 @@
 
 = Introduction =
 
-TBD
+The Jena Explorer View is a key component of the Jena perspective in that it provides a persistent list of connections to Jena stores.
