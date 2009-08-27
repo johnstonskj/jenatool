@@ -3,6 +3,19 @@
 
 = Introduction =
 
-TBD
+The ability to import RDF into a connected Jena store has been identified in the Vision as a key feature. The tool provides two distinct mechanisms to import existing RDF content, as follows.
+
+  * Using the standard Eclipse `File->Import...` menu the user can select the `Jena` category in the import wizard, then select `Import RDF Content` to start the import wizard. Note that the import URL in the resulting wizard only contains the URL starting point `http://` for the user to complete.
+  * By right-clicking on a resource in the navigator with a registered RDF content type (N-Triple, Turtle, N3, RDF/XML) the user can select the `Jena` context menu and then the `Quick Import` action. This uses the same import dialog as above, but the URL is already set to be the URL of the selected resource, the format will be correctly set, and the target dataset is selected as the current default dataset specified in the Jena Explorer View.
+
+== Import Wizard ==
+
+The following shows the import wizard, the fields are described below.
 
 http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/help/images/jt-import-rdf.png
+
+  * Import URL - the URL of the resource to import.
+  * Format - the format of the resource to import.
+  * Target Dataset - the dataset to import the resource into.
+  * Graph Name URL - if specified will create a named graph in the store, otherwise the resource is added to the default graph.
+  * Base Name URL - if the resource may contain relative URLs the base name can be used to construct absolute URLs.
