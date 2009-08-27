@@ -324,7 +324,7 @@ public class JenaExplorerView extends ViewPart {
 		};
 		addConnectionAction.setText("Add");
 		addConnectionAction.setToolTipText("Add New Connection");
-		addConnectionAction.setImageDescriptor(Activator.getImageDescriptor("icons/connection_new.png"));
+		addConnectionAction.setImageDescriptor(Activator.getImageDescriptor("icons/connection_new.gif"));
 		
 		removeConnectionAction = new Action() {
 			public void run() {

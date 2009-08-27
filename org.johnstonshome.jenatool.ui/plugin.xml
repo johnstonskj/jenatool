@@ -53,7 +53,7 @@
       <editor
             name="SPARQL Editor"
             extensions="sparql"
-            icon="icons/sparql_file.png"
+            icon="icons/sparql_file.gif"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             class="org.eclipse.ui.editors.text.TextEditor"
             id="org.johnstonshome.jenatool.ui.editors.SparqlEditor">
@@ -67,7 +67,7 @@
       <editor
             name="RDF Text Editor"
             extensions="nt,ttl,n3"
-            icon="icons/rdf_file.png"
+            icon="icons/rdf_file.gif"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             class="org.eclipse.ui.editors.text.TextEditor"
             id="org.johnstonshome.jenatool.ui.editors.RdfTextEditor">
@@ -235,7 +235,7 @@
       <view
             category="org.johnstonshome.jenatool.ui"
             class="org.johnstonshome.jenatool.ui.views.SparqlResultsView"
-            icon="icons/sparql_results_view.png"
+            icon="icons/sparql_results_view.gif"
             id="org.johnstonshome.jenatool.ui.views.SparqlResultsView"
             name="SPARQL Results">
       </view>
@@ -271,7 +271,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             name="Jena"
-            icon="icons/jena_perspective.png"
+            icon="icons/jena_perspective.gif"
             class="org.johnstonshome.jenatool.ui.perspective.JenaPerspective"
             id="org.johnstonshome.jenatool.ui.jenaPerspective">
       </perspective>         
@@ -285,14 +285,14 @@
       <wizard
             category="org.johnstonshome.jenatool.ui.wizards"
             class="org.johnstonshome.jenatool.ui.wizards.NewRdfFileWizard"
-            icon="icons/rdf_file.png"
+            icon="icons/rdf_file.gif"
             id="org.johnstonshome.jenatool.ui.wizards.NewRdfFileWizard"
             name="New RDF/XML File">
       </wizard>
       <wizard
             category="org.johnstonshome.jenatool.ui.wizards"
             class="org.johnstonshome.jenatool.ui.wizards.NewSparqlFileWizard"
-            icon="icons/sparql_file.png"
+            icon="icons/sparql_file.gif"
             id="org.johnstonshome.jenatool.ui.wizards.NewSparqlFileWizard"
             name="New SPARQL Query">
       </wizard>
@@ -306,7 +306,7 @@
       <wizard
             category="org.johnstonshome.jenatool.ui.importWizards.jenaCategory"
             class="org.johnstonshome.jenatool.ui.importWizards.RdfImportImportWizard"
-            icon="icons/rdf_file.png"
+            icon="icons/rdf_file.gif"
             id="org.johnstonshome.jenatool.ui.importWizards.RdfImportImportWizard"
             name="Import RDF Content">
          <description>
