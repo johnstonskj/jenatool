@@ -1,0 +1,6 @@
+#summary Covers design decisions on the layout of the plugins in the tool.
+#labels Phase-Design,Feature
+
+= Introduction =
+
+TBD
