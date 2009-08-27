@@ -36,9 +36,13 @@ public class JenaToolPreferencePage
 	 * restore itself.
 	 */
 	public void createFieldEditors() {
-		addField(new BooleanFieldEditor(
-				PreferenceConstants.P_USE_DEFAULT_UNION,
-				"&Use union-default-graph by default",
+		addField(new RadioGroupFieldEditor(
+				PreferenceConstants.P_DEFAULT_CONTEXT,
+				"Select the default query context.",
+				1,
+				new String[][] { 
+						{ "Context is the store's default model", "default" }, 
+						{ "Context is the union of all named models in the store", "union" } }, 
 				getFieldEditorParent()));
 
 		addField(new FontFieldEditor(

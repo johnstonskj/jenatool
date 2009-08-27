@@ -34,7 +34,7 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
  * OR with the extension that matches the expected one (rdf).
  */
 
-public class NewRdfFileWizardPage extends WizardPage {
+class NewRdfFileWizardPage extends WizardPage {
 	
 	private Text containerText;
 	private Text fileText;

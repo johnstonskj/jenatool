@@ -57,7 +57,6 @@ import org.johnstonshome.jenatool.ui.preferences.PreferenceConstants;
 public class SparqlResultsView extends ViewPart implements IPropertyChangeListener {
 	private TextViewer viewer;
 	private Action terminateAction;
-//	private Action datasetAction;
 	private Action clearTextAction;
 	private Action saveTextAction;
 
@@ -137,22 +136,12 @@ public class SparqlResultsView extends ViewPart implements IPropertyChangeListen
 	
 	private void fillLocalToolBar(IToolBarManager manager) {
 		manager.add(terminateAction);
-//		manager.add(datasetAction);
 		manager.add(new Separator());
 		manager.add(clearTextAction);
 		manager.add(saveTextAction);
 	}
 
-	private void makeActions() {
-//		datasetAction = new Action() {
-//			public void run() {
-//				showMessage("Dataset executed");
-//			}
-//		};
-//		datasetAction.setText("Dataset");
-//		datasetAction.setToolTipText("Select Context Dataset");
-//		datasetAction.setImageDescriptor(Activator.getImageDescriptor("icons/connection.gif"));
-		
+	private void makeActions() {		
 		terminateAction = new Action() {
 			public void run() {
 				showMessage("Terminate executed");
@@ -165,7 +154,6 @@ public class SparqlResultsView extends ViewPart implements IPropertyChangeListen
 		clearTextAction = new Action() {
 			public void run() {
 				contents.set("");
-//				showMessage("Clear executed");
 			}
 		};
 		clearTextAction.setText("Clear");

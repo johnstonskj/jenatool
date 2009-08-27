@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Text;
 import org.johnstonshome.jenatool.internal.Connection;
 import org.johnstonshome.jenatool.internal.Connections;
 
-public class RdfImportWizardPage extends WizardPage {
+class RdfImportWizardPage extends WizardPage {
 	
 	private String initialUrl;
 	private Text   importUrl;
