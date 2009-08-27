@@ -4,11 +4,29 @@
 
 This page gives an overview of the current and planned releases for the tool and targeted features.
 
+== Release 1.0.0 (planned) ==
 
-== Release 0.9.0 ==
+*Theme*
+The aim is to complete the vision for the tool as it stands today, this includes completion of all features but also includes help, documentation and so forth. Details of features for this release will be included as we get closer to release candidate status, the following are a list of known outstanding features and major work:
 
+  * More complete syntax-checking SPARQL editor.
+  * _Possible_ syntax-checking editors for N-Triples, Turtle and N3.
+  * A Query-by-example feature to build SPARQL queries.
+  * Support for SDB and potentially RDB backends.
+  * Support for Jena's code generation from OWL vocabularies.
+  * Pellet integration into query execution, as an option.
+
+== Release 0.9.1 (planned) ==
+
+*Theme*
+This is aimed as a stabilization release, to finish off all the features introduced in 0.9.0 and to focus on stability and usability. No new features will be introduced, but this release will include an Eclipse update site for the first time for users to download the release directly from inside their IDE.
+
+== Release 0.9.0 (complete) ==
+
+*Theme*
 This is the first planned release and is intended only as a baseline from which to work from. However, certain features will be included in an initial (and probably buggy) form.
 
+*Features*
   * There is a Jena perspective
   * The Jena Explorer view is included but only supports TDB connections.
   * The SPARQL Results view is included.
