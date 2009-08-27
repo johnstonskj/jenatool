@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.johnstonshome.jenatool.feature_0.9.0.jar" id="org.johnstonshome.jenatool.feature" version="0.9.0">
+      <category name="jena"/>
+   </feature>
+   <category-def name="jena" label="Jena Tools">
+      <description>
+         Tools for developing with and testing against Jena the Semantic Web Framework.
+      </description>
+   </category-def>
+</site>
