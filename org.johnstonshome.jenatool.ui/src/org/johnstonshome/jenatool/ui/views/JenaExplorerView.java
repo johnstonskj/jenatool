@@ -69,6 +69,7 @@ public class JenaExplorerView extends ViewPart {
 	private TreeViewer viewer;
 	private Action addConnectionAction;
 	private Action removeConnectionAction;
+	private Action closeConnectionAction;
 	private Action defaultConnectionAction;
 	private Action doubleClickAction;
 	
@@ -226,7 +227,6 @@ public class JenaExplorerView extends ViewPart {
 	 */
 	public void createPartControl(Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-//		drillDownAdapter = new DrillDownAdapter(viewer);
 		viewer.setContentProvider(new ViewContentProvider());
 		viewer.setLabelProvider(new ViewLabelProvider());
 		viewer.setSorter(new NameSorter());
@@ -237,12 +237,19 @@ public class JenaExplorerView extends ViewPart {
 		      {
 		    	  IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 		    	  selected = (TreeObject) selection.getFirstElement();
-		    	  if (selected instanceof TreeParent) {
-		    		  removeConnectionAction.setEnabled(false);
-		    		  defaultConnectionAction.setEnabled(false);
-		    	  } else {
-		    		  removeConnectionAction.setEnabled(true);
-		    		  defaultConnectionAction.setEnabled(true);
+		    	  if (selected != null) {
+			    	  if (selected instanceof TreeParent) {
+			    		  addConnectionAction.setEnabled(true);
+			    		  removeConnectionAction.setEnabled(false);
+			    		  closeConnectionAction.setEnabled(false);
+			    		  defaultConnectionAction.setEnabled(false);
+			    	  } else {
+			    		  ConnectionTreeObject cto = (ConnectionTreeObject)selected;
+			    		  addConnectionAction.setEnabled(false);
+			    		  removeConnectionAction.setEnabled(true);
+			    		  closeConnectionAction.setEnabled(cto.getConnection().isConnected());
+			    		  defaultConnectionAction.setEnabled(true);
+			    	  }
 		    	  }
 		      }
 		});
@@ -282,12 +289,14 @@ public class JenaExplorerView extends ViewPart {
 	private void fillLocalPullDown(IMenuManager manager) {
 		manager.add(addConnectionAction);
 		manager.add(removeConnectionAction);
+		manager.add(closeConnectionAction);
 		manager.add(defaultConnectionAction);
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(addConnectionAction);
 		manager.add(removeConnectionAction);
+		manager.add(closeConnectionAction);
 		manager.add(defaultConnectionAction);
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
@@ -295,6 +304,7 @@ public class JenaExplorerView extends ViewPart {
 	private void fillLocalToolBar(IToolBarManager manager) {
 		manager.add(addConnectionAction);
 		manager.add(removeConnectionAction);
+		manager.add(closeConnectionAction);
 		manager.add(defaultConnectionAction);
 	}
 
@@ -343,6 +353,27 @@ public class JenaExplorerView extends ViewPart {
 		removeConnectionAction.setToolTipText("Delete Connection");
 		removeConnectionAction.setImageDescriptor(Activator.getImageDescriptor("icons/object_delete.gif"));
 		removeConnectionAction.setEnabled(false);
+
+		closeConnectionAction = new Action() {
+			public void run() {
+				boolean yes = MessageDialog.openQuestion(
+						viewer.getControl().getShell(), 
+						"Close Connection", 
+						"Are you sure you want to close the connection '" + selected.toString() + "'?");
+				if (yes) {
+					Connection conn = ((ConnectionTreeObject)selected).getConnection();
+					conn.disconnect();
+					if (Connections.getDefaultConnection().toString().equals(conn.toString())) {
+						Connections.setDefaultConnection(null);
+					}
+					viewer.refresh(true);
+				}
+			}
+		};
+		closeConnectionAction.setText("Close");
+		closeConnectionAction.setToolTipText("Close Connection");
+		closeConnectionAction.setImageDescriptor(Activator.getImageDescriptor("icons/connection_closed.gif"));
+		closeConnectionAction.setEnabled(false);
 
 		defaultConnectionAction = new Action() {
 			public void run() {
