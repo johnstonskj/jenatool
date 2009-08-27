@@ -1,0 +1,19 @@
+#summary Project and release plan.
+
+= Introduction =
+
+This page gives an overview of the current and planned releases for the tool and targeted features.
+
+
+== Release 0.9.0 ==
+
+This is the first planned release and is intended only as a baseline from which to work from. However, certain features will be included in an initial (and probably buggy) form.
+
+  * There is a Jena perspective
+  * The Jena Explorer view is included but only supports TDB connections.
+  * The SPARQL Results view is included.
+  * File types, with icons, are included for RDF content and SPARQL queries, these have no customization of the editors however.
+    * SPARQL files support a "Run Query" context action in the navigator to execute.
+    * RDF content files support a "Quick Import" context action to add them to a connection.
+  * There are new file dialogs for RDF/XML files and SPARQL queries.
+  * There is an import action to add existing RDF content to a connection.
