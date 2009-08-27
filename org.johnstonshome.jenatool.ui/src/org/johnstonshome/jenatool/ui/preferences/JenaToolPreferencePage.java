@@ -41,6 +41,11 @@ public class JenaToolPreferencePage
 				"&Use union-default-graph by default",
 				getFieldEditorParent()));
 
+		addField(new FontFieldEditor(
+				PreferenceConstants.P_RESULTS_VIEW_FONT,
+				"Select the font for the SPARQL Results View",
+				getFieldEditorParent()));
+		
 		addField(new RadioGroupFieldEditor(
 				PreferenceConstants.P_RDF_RESULT_FORM,
 				"Default RDF representation for DESCRIBE and CONSTRUCT queries.",

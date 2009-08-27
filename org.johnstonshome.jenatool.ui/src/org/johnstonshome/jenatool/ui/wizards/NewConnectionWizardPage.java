@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.johnstonshome.jenatool.internal.Connection;
-import org.johnstonshome.jenatool.ui.preferences.Preferences;
+import org.johnstonshome.jenatool.ui.preferences.PluginPreferences;
 
 public class NewConnectionWizardPage extends WizardPage {
 	
@@ -72,7 +72,7 @@ public class NewConnectionWizardPage extends WizardPage {
 			}
 		});
 		
-		Preferences prefs = new Preferences();
+		PluginPreferences prefs = new PluginPreferences();
 		label = new Label(container, SWT.NULL);
 		label.setText("");
 		union = new Button(container, SWT.CHECK);

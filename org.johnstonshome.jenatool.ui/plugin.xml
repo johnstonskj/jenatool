@@ -319,7 +319,7 @@
       <page
             class="org.johnstonshome.jenatool.ui.preferences.JenaToolPreferencePage"
             id="org.johnstonshome.jenatool.ui.preferences.JenaToolPreferencePage"
-            name="JenaTool">
+            name="Jena">
       </page>
    </extension>
    <extension
