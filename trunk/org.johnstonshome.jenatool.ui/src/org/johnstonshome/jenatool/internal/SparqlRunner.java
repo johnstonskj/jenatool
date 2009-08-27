@@ -17,7 +17,7 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.IDocument;
-import org.johnstonshome.jenatool.ui.preferences.Preferences;
+import org.johnstonshome.jenatool.ui.preferences.PluginPreferences;
 import org.johnstonshome.jenatool.ui.views.SparqlResultsView;
 
 import com.hp.hpl.jena.query.Dataset;
@@ -60,7 +60,7 @@ public class SparqlRunner {
 		builder.append("\n");
 //		builder.append(query);
 		
-		Preferences prefs = new Preferences();
+		PluginPreferences prefs = new PluginPreferences();
 		Connection conn = Connections.getDefaultConnection();
 		Dataset dataset = null;
 					

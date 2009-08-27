@@ -19,8 +19,11 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextViewer;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
@@ -29,6 +32,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 import org.johnstonshome.jenatool.internal.SparqlRunner;
 import org.johnstonshome.jenatool.ui.Activator;
+import org.johnstonshome.jenatool.ui.preferences.PluginPreferences;
+import org.johnstonshome.jenatool.ui.preferences.PreferenceConstants;
 
 
 /**
@@ -49,7 +54,7 @@ import org.johnstonshome.jenatool.ui.Activator;
  * <p>
  */
 
-public class SparqlResultsView extends ViewPart {
+public class SparqlResultsView extends ViewPart implements IPropertyChangeListener {
 	private TextViewer viewer;
 	private Action terminateAction;
 //	private Action datasetAction;
@@ -89,14 +94,14 @@ public class SparqlResultsView extends ViewPart {
 		viewer.setInput(getViewSite());
 		viewer.setEditable(false);
 		viewer.setDocument(contents);
-		Font mono = new Font(viewer.getControl().getShell().getDisplay(), "Courier New", 10, SWT.NORMAL);
-		viewer.getControl().setFont(mono);
+		updateFont(false);
 
 		// Create the help context id for the viewer's control
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "org.johnstonshome.jenatool.ui.viewer");
 		makeActions();
 		hookContextMenu();
 		contributeToActionBars();
+		Activator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
 
 	private void hookContextMenu() {
@@ -189,5 +194,19 @@ public class SparqlResultsView extends ViewPart {
 	 */
 	public void setFocus() {
 		viewer.getControl().setFocus();
+	}
+
+	public void propertyChange(PropertyChangeEvent event) {
+		String property = event.getProperty();
+		if (property.equals(PreferenceConstants.P_RESULTS_VIEW_FONT)) {
+			updateFont(true);
+		}
+	}
+	
+	private void updateFont(boolean dispose) {
+		PluginPreferences prefs = new PluginPreferences();
+		FontData defaultFontData = prefs.getResultsViewFont();
+		Font mono = new Font(viewer.getControl().getShell().getDisplay(), defaultFontData);
+		viewer.getControl().setFont(mono);
 	}
 }
