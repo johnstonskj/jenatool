@@ -16,6 +16,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
 import org.johnstonshome.jenatool.internal.Connection;
 import org.johnstonshome.jenatool.internal.ConnectionType;
+import org.johnstonshome.jenatool.internal.TDBConnection;
 import org.johnstonshome.jenatool.ui.Activator;
 
 public class NewConnectionWizard extends Wizard {
@@ -50,14 +51,12 @@ public class NewConnectionWizard extends Wizard {
 		
 		if (ok) {
 			ConnectionType type = ConnectionType.valueOf(ConnectionType.class, mainPage.getType());
-			boolean union = mainPage.isUnion();
 			if (connection == null) {
-				connection = new Connection(type, location);
+				connection = new TDBConnection(type, location);
 			} else {
 				connection.setType(type);
 				connection.setUrl(location);
 			}
-			connection.setUnion(union);
 		}
 		
 		return ok;

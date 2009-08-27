@@ -19,6 +19,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.johnstonshome.jenatool.internal.Connection;
 import org.johnstonshome.jenatool.internal.ConnectionType;
 import org.johnstonshome.jenatool.internal.Connections;
+import org.johnstonshome.jenatool.internal.TDBConnection;
 import org.osgi.framework.BundleContext;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -65,12 +66,9 @@ public class Activator extends AbstractUIPlugin {
 			while (nodes.hasNext()) {
 				RDFNode node = nodes.next();
 				if (node.isLiteral()) {
-					connections.add(new Connection(ConnectionType.TDB, node.toString()));
+					connections.add(new TDBConnection(ConnectionType.TDB, node.toString()));
 				}
 			}
-		}
-		if (connections.size() == 0) {
-			connections.add(new Connection(ConnectionType.TDB, "/tmp/jena-tdb"));
 		}
 		Connections.setConnections(connections);
 	}

@@ -14,20 +14,17 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.johnstonshome.jenatool.internal.Connection;
-import org.johnstonshome.jenatool.ui.preferences.PluginPreferences;
 
-public class NewConnectionWizardPage extends WizardPage {
+class NewConnectionWizardPage extends WizardPage {
 	
 	private Connection connection = null;
 	private Combo type;
 	private Text  location;
-	private Button union;
 
 	public NewConnectionWizardPage(Connection connection) {
 		super("Jena Connection");
@@ -62,6 +59,7 @@ public class NewConnectionWizardPage extends WizardPage {
 		label.setText("&Dataset Location:");
 		location = new Text(container, SWT.BORDER | SWT.SINGLE);
 		if (connection != null) {
+			location.setText(connection.getUrl());
 			location.setEnabled(false);
 		}
 		gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -71,21 +69,6 @@ public class NewConnectionWizardPage extends WizardPage {
 				dialogChanged();
 			}
 		});
-		
-		PluginPreferences prefs = new PluginPreferences();
-		label = new Label(container, SWT.NULL);
-		label.setText("");
-		union = new Button(container, SWT.CHECK);
-		union.setText("Use union-default-graph setting");
-		union.setSelection(prefs.isUseDefaultGraph());
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		union.setLayoutData(gd);
-		
-		if (connection != null) {
-	    	type.setText(connection.getType().toString());
-	    	location.setText(connection.getUrl());
-	    	union.setSelection(connection.isUnion());
-		}
 		
 		setControl(container);
 	}
@@ -109,9 +92,5 @@ public class NewConnectionWizardPage extends WizardPage {
 
 	public String getLocation() {
 		return location.getText();
-	}
-
-	public boolean isUnion() {
-		return union.getSelection();
 	}
 }

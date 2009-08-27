@@ -20,7 +20,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 */
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		store.setDefault(PreferenceConstants.P_USE_DEFAULT_UNION, true);
+		store.setDefault(PreferenceConstants.P_DEFAULT_CONTEXT, "default");
 		store.setDefault(PreferenceConstants.P_RDF_RESULT_FORM, "N3");
 		PreferenceConverter.setDefault(store, PreferenceConstants.P_RESULTS_VIEW_FONT, new FontData("Courier New", 10, SWT.NORMAL));
 	}

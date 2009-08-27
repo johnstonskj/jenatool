@@ -30,7 +30,6 @@ import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.tdb.TDB;
 import com.hp.hpl.jena.tdb.TDBFactory;
-import com.hp.hpl.jena.tdb.base.file.Location;
 
 public class SparqlRunner {
 		
@@ -54,41 +53,40 @@ public class SparqlRunner {
 		this.results = results;
 	}
 
-	public void runSparqlQuery(String query) {
+	public void runSparqlQuery(String query, Connection conn, boolean isUnion, String format) {
 		IDocument current = view.getDocument();
 		StringBuilder builder = new StringBuilder(current.get());
 		builder.append("\n");
-//		builder.append(query);
 		
-		PluginPreferences prefs = new PluginPreferences();
-		Connection conn = Connections.getDefaultConnection();
-		Dataset dataset = null;
+		TDBConnection tdbConn = (TDBConnection)conn;
+		tdbConn.connect();
+		
 					
 		try {
-			switch (conn.getType()) {
-			case TDB:
-				Location loc = new Location(conn.getUrl());
-				dataset = TDBFactory.createDataset(loc);
-				TDB.getContext().set(TDB.symUnionDefaultGraph, conn.isUnion());
-				break;
-			}
+//			switch (conn.getType()) {
+//			case TDB:
+//				Location loc = new Location(conn.getUrl());
+//				dataset = TDBFactory.createDataset(loc);
+//				TDB.getContext().set(TDB.symUnionDefaultGraph, isUnion);
+//				break;
+//			}
 			
 			long start = System.currentTimeMillis();
 			Query parsed = QueryFactory.create(query);
 
-			Dataset queryDataset = dataset; 
+			Dataset queryDataset = tdbConn.getDataset(); 
 			if (parsed.getNamedGraphURIs().size() > 0) {
 				queryDataset = TDBFactory.createDataset(); 
 				for (Iterator<String> iterator = parsed.getNamedGraphURIs().iterator(); iterator.hasNext();) { 
 					String name = iterator.next(); 
-					Model model = queryDataset.getNamedModel(name); 
-					model.add(dataset.getNamedModel(name).listStatements()); 
+					Model model = conn.getNamedModel(name); 
+					model.add(tdbConn.getDataset().getNamedModel(name).listStatements()); 
 					TDB.sync(queryDataset); 
 				}
 			} 
 
 			QueryExecution qe = QueryExecutionFactory.create(parsed, queryDataset);
-			qe.getContext().set(TDB.symUnionDefaultGraph, conn.isUnion()) ; 
+			qe.getContext().set(TDB.symUnionDefaultGraph, isUnion) ; 
 
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			if (parsed.isSelectType()) {
@@ -99,14 +97,14 @@ public class SparqlRunner {
 				if (model.isEmpty()) {
 					baos.write("No results.\n".getBytes());
 				} else {
-					model.write(baos, prefs.getDefaultRdfForm(), "");
+					model.write(baos, format, "");
 				}
 			} else if (parsed.isConstructType()) {
 				Model model = qe.execConstruct();
 				if (model.isEmpty()) {
 					baos.write("No results.\n".getBytes());
 				} else {
-					model.write(baos, prefs.getDefaultRdfForm(), "");
+					model.write(baos, format, "");
 				}
 			} else if (parsed.isAskType()) {
 				boolean result = qe.execAsk();
@@ -122,16 +120,24 @@ public class SparqlRunner {
 		} catch (Throwable e) {
 			builder.append(e);
 			e.printStackTrace();
-		} finally {	
-			if (dataset != null) {
-				dataset.close();
-			}
 		}
 		
 		results = builder.toString();
 	}
+	
+	public void runSparqlQuery(String query) {
+		PluginPreferences prefs = new PluginPreferences();
+		Connection conn = Connections.getDefaultConnection();
+		runSparqlQuery(query, conn, prefs.isUseDefaultGraph(), prefs.getDefaultRdfForm());
+	}
 
 	public void runSparqlQuery(IFile resource) {
+		PluginPreferences prefs = new PluginPreferences();
+		Connection conn = Connections.getDefaultConnection();
+		runSparqlQuery(resource, conn, prefs.isUseDefaultGraph(), prefs.getDefaultRdfForm());
+	}
+	
+	public void runSparqlQuery(IFile resource, Connection conn, boolean isUnion, String format) {
 		try {
 			InputStream is = resource.getContents();
 			InputStreamReader isr = new InputStreamReader(is);
@@ -149,7 +155,7 @@ public class SparqlRunner {
 			isr.close();
 			is.close();
 			
-			runSparqlQuery(contents.toString());
+			runSparqlQuery(contents.toString(), conn, isUnion, format);
 			
 		} catch (Exception e) {
 			e.printStackTrace(System.err);

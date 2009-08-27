@@ -67,7 +67,6 @@ import org.johnstonshome.jenatool.ui.wizards.NewConnectionWizard;
 
 public class JenaExplorerView extends ViewPart {
 	private TreeViewer viewer;
-//	private DrillDownAdapter drillDownAdapter;
 	private Action addConnectionAction;
 	private Action removeConnectionAction;
 	private Action defaultConnectionAction;
@@ -202,7 +201,11 @@ public class JenaExplorerView extends ViewPart {
 				if (connObj.getConnection().equals(Connections.getDefaultConnection())) {
 					return ImageCache.getImage("icons/connection_edit.gif");
 				} else {
-					return ImageCache.getImage("icons/connection.gif");
+					if (connObj.getConnection().isConnected()) {
+						return ImageCache.getImage("icons/connection.gif");
+					} else {
+						return ImageCache.getImage("icons/connection_closed.gif");
+					}
 				}
 			}
 		}
@@ -286,9 +289,6 @@ public class JenaExplorerView extends ViewPart {
 		manager.add(addConnectionAction);
 		manager.add(removeConnectionAction);
 		manager.add(defaultConnectionAction);
-//		manager.add(new Separator());
-//		drillDownAdapter.addNavigationActions(manager);
-		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 	
@@ -296,8 +296,6 @@ public class JenaExplorerView extends ViewPart {
 		manager.add(addConnectionAction);
 		manager.add(removeConnectionAction);
 		manager.add(defaultConnectionAction);
-//		manager.add(new Separator());
-//		drillDownAdapter.addNavigationActions(manager);
 	}
 
 	private void makeActions() {
@@ -312,6 +310,7 @@ public class JenaExplorerView extends ViewPart {
 		        	
 	        		Connection conn = wizard.getConnection();
 		        	if (conn != null) {
+		        		conn.connect();
 		        		Connections.add(conn);
 						TreeObject obj = new ConnectionTreeObject(conn);
 						connectionFolder.addChild(obj);
@@ -349,6 +348,7 @@ public class JenaExplorerView extends ViewPart {
 			public void run() {
 				ConnectionTreeObject obj = (ConnectionTreeObject)selected;
 				Connections.setDefaultConnection(obj.getConnection());
+        		obj.getConnection().connect();
 				viewer.refresh(true);
 			}
 		};
@@ -369,7 +369,7 @@ public class JenaExplorerView extends ViewPart {
 		        	dialog.create();
 		        	dialog.open();
 		        	
-					viewer.refresh(true);
+	        		viewer.refresh(true);
 		        } catch (Throwable t) {
 		        	t.printStackTrace();
 		        }

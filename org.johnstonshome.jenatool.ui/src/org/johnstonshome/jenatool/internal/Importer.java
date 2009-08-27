@@ -8,28 +8,18 @@
  */
 package org.johnstonshome.jenatool.internal;
 
-import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.tdb.TDB;
-import com.hp.hpl.jena.tdb.TDBFactory;
-import com.hp.hpl.jena.tdb.base.file.Location;
 
 public class Importer {
 
 	public boolean importResource(String resourceUrl, String format, Connection connection, String graphUrl, String baseUrl) {
-		Dataset dataset = null;
 		try {
-			switch (connection.getType()) {
-			case TDB:
-				Location loc = new Location(connection.getUrl());
-				dataset = TDBFactory.createDataset(loc);
-				break;
-			}
+			connection.connect();
 			Model target = null;
 			if (graphUrl.equals("")) {
-				target = dataset.getDefaultModel();
+				target = connection.getDefaultModel();
 			} else {
-				target = dataset.getNamedModel(graphUrl);
+				target = connection.getNamedModel(graphUrl);
 			}
 			System.out.println("Graph: " + (graphUrl.equals("") ? "default" : graphUrl));
 			System.out.println("*** BEFORE ***");
@@ -37,14 +27,10 @@ public class Importer {
 			target.read(resourceUrl, baseUrl, format.toUpperCase());
 			System.out.println("*** AFTER ***");
 			target.write(System.out, "N-TRIPLES");
-			TDB.sync(dataset);
+			connection.sync();
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return false;
-		} finally {	
-			if (dataset != null) {
-				dataset.close();
-			}
 		}
 		return true;
 	}
