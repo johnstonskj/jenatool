@@ -5,4 +5,4 @@
 
 TBD
 
-http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/help/images/jt-new-sparql.png
+http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/help/images/jt-run-query.png
