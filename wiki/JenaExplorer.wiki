@@ -7,6 +7,8 @@ The Jena Explorer View is a key component of the Jena perspective in that it pro
 
 http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/help/images/jt-perspective.png
 
+== Actions ==
+
 The Jena Explorer View provides the following actions:
 
 ||  *Button*  ||  *On*  ||  *Comments*  ||
@@ -16,3 +18,9 @@ The Jena Explorer View provides the following actions:
 || N/A || Any connection || On double-clicking any connection some properties of the connection can be edited. ||
 
 All connections added to the view are persisted so that the list will be remembered across Eclipse sessions. However, the default connection is not persisted, the user must select the default each time Eclipse is run anew.
+
+== New Connection Wizard ==
+
+The following demonstrates the new connection wizard.
+
+http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/help/images/jt-new-connection.png
