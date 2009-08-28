@@ -12,7 +12,7 @@ The ability to import RDF into a connected Jena store has been identified in the
 
 The following shows the import wizard, the fields are described below.
 
-http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/help/images/jt-import-rdf.png
+http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.help/html/images/jt-import-rdf.png
 
   * Import URL - the URL of the resource to import.
   * Format - the format of the resource to import.
