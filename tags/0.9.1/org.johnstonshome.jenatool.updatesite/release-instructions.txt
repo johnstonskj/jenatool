@@ -1,0 +1,13 @@
+To create/install a build to the update site.
+
+1. Open site.xml
+2. Run the "Build All" command to create all the necessary artifacts
+3. Open the S3 bucket at http://jenatool.s3.amazonaws.com/
+4. Copy the following files *only* to the S3 bucket:
+   - features/*
+   - plugins/*
+   - site.xml
+5. Specifically, do not copy artifacts.xml and content.xml.
+6. Zip up the same contents as were copied to S3 and name them:
+   - org.johnstonshome.jenatool.<release>.zip
+7. Add the zip file to the Google Code project Downloads.

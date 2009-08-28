@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description url="http://jenatool.s3.amazonaws.com/">
+      The primary update site for JenaTool.
+   </description>
+   
+   <feature url="features/org.johnstonshome.jenatool.feature_0.9.1.200908281117.jar" id="org.johnstonshome.jenatool.feature" version="0.9.1.200908281117">
+      <category name="Jena Tools"/>
+   </feature>
+   
+   <category-def name="Jena Tools" label="Jena Tools" />
+</site>

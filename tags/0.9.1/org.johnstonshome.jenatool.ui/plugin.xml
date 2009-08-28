@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<!--
+ * Licensed Materials - Property of Simon Johnston (simon@johnstonshome.org)
+ * (c) Copyright Simon Johnston 2009. All rights reserved.
+ * 
+ * For full license details, see the file LICENSE inncluded in the
+ * distribution of this code.
+ * 
+-->
+<plugin>
+
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+	   <content-type
+	   			 base-type="org.eclipse.core.runtime.text"
+	             file-extensions="sparql"
+	             id="org.johnstonshome.jenatool.contenttypes.sparql"
+	             name="SPARQL Query"
+	             priority="normal">
+	   </content-type>
+	   <content-type
+	   			 base-type="org.eclipse.core.runtime.text"
+	             file-extensions="nt"
+	             id="org.johnstonshome.jenatool.contenttypes.nt"
+	             name="RDF N-Triples"
+	             priority="normal">
+	   </content-type>
+	   <content-type
+	   			 base-type="org.eclipse.core.runtime.text"
+	             file-extensions="ttl"
+	             id="org.johnstonshome.jenatool.contenttypes.ttl"
+	             name="RDF Turtle"
+	             priority="normal">
+	   </content-type>
+	   <content-type
+	   			 base-type="org.eclipse.core.runtime.text"
+	             file-extensions="n3"
+	             id="org.johnstonshome.jenatool.contenttypes.n3"
+	             name="RDF N3"
+	             priority="normal">
+	   </content-type>
+	   <content-type
+	   			 base-type="org.eclipse.core.runtime.xml"
+	             file-extensions="rdf"
+	             id="org.johnstonshome.jenatool.contenttypes.rdf"
+	             name="RDF/XML"
+	             priority="normal">
+	   </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="SPARQL Editor"
+            extensions="sparql"
+            icon="icons/sparql_file.gif"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="org.eclipse.ui.editors.text.TextEditor"
+            id="org.johnstonshome.jenatool.ui.editors.SparqlEditor">
+            <contentTypeBinding
+                 contentTypeId="org.johnstonshome.jenatool.contenttypes.sparql">
+            </contentTypeBinding>
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="RDF Text Editor"
+            extensions="nt,ttl,n3"
+            icon="icons/rdf_file.gif"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="org.eclipse.ui.editors.text.TextEditor"
+            id="org.johnstonshome.jenatool.ui.editors.RdfTextEditor">
+            <contentTypeBinding
+                 contentTypeId="org.johnstonshome.jenatool.contenttypes.nt">
+            </contentTypeBinding>
+            <contentTypeBinding
+                 contentTypeId="org.johnstonshome.jenatool.contenttypes.ttl">
+            </contentTypeBinding>
+            <contentTypeBinding
+                 contentTypeId="org.johnstonshome.jenatool.contenttypes.n3">
+            </contentTypeBinding>
+      </editor>
+   </extension>
+   <!--
+   <extension point="org.eclipse.ui.commands">
+	        <command id="org.johnstonshome.jenatool.ui.editors.runCommand"
+	             defaultHandler="org.johnstonshome.jenatool.ui.editors.RunSparqlCommand"
+	             name="Run Query"
+	             description="Run as SPARQL query" />
+   </extension>
+   <extension point="org.eclipse.ui.menus">
+            <menuContribution locationURI="popup:#TextEditorContext?after=additions">
+                 <command commandId="org.johnstonshome.jenatool.ui.editors.runCommand"
+                          icon="icons/task_start.gif" />
+            </menuContribution>
+   </extension>
+   -->
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.johnstonshome.jenatool.ui.runContribution"
+            objectClass="org.eclipse.core.resources.IFile">
+		 <visibility>
+		 	   <objectState name="contentTypeId"
+		          value="org.johnstonshome.jenatool.contenttypes.sparql" />
+		 </visibility>
+         <menu
+               id="org.johnstonshome.jenatool.ui.runMenu"
+               label="Jena"
+               path="additions">
+            <separator
+                  name="group">
+            </separator>
+         </menu>
+         <action
+               class="org.johnstonshome.jenatool.ui.popup.actions.RunSparqlQueryAction"
+               enablesFor="1"
+               id="org.johnstonshome.jenatool.ui.runAction"
+               label="Run Query"
+               icon="icons/task_start.gif"
+               menubarPath="org.johnstonshome.jenatool.ui.runMenu/group">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="org.johnstonshome.jenatool.ui.importContribution1"
+            objectClass="org.eclipse.core.resources.IFile">
+		 <visibility>
+		 	   <objectState name="contentTypeId"
+		          value="org.johnstonshome.jenatool.contenttypes.nt" />
+		 </visibility>
+         <menu
+               id="org.johnstonshome.jenatool.ui.importMenu1"
+               label="Jena"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="org.johnstonshome.jenatool.ui.popup.actions.ImportRdfFileAction"
+               enablesFor="1"
+               id="org.johnstonshome.jenatool.ui.importAction1"
+               label="Quick Import"
+               icon="icons/import_wiz.gif"
+               menubarPath="org.johnstonshome.jenatool.ui.importMenu1/group1">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="org.johnstonshome.jenatool.ui.importContribution2"
+            objectClass="org.eclipse.core.resources.IFile">
+		 <visibility>
+		 	   <objectState name="contentTypeId"
+		          value="org.johnstonshome.jenatool.contenttypes.ttl" />
+		 </visibility>
+         <menu
+               id="org.johnstonshome.jenatool.ui.importMenu2"
+               label="Jena"
+               path="additions">
+            <separator
+                  name="group2">
+            </separator>
+         </menu>
+         <action
+               class="org.johnstonshome.jenatool.ui.popup.actions.ImportRdfFileAction"
+               enablesFor="1"
+               id="org.johnstonshome.jenatool.ui.importAction2"
+               label="Quick Import"
+               icon="icons/import_wiz.gif"
+               menubarPath="org.johnstonshome.jenatool.ui.importMenu2/group2">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="org.johnstonshome.jenatool.ui.importContribution3"
+            objectClass="org.eclipse.core.resources.IFile">
+		 <visibility>
+		 	   <objectState name="contentTypeId"
+		          value="org.johnstonshome.jenatool.contenttypes.n3" />
+		 </visibility>
+         <menu
+               id="org.johnstonshome.jenatool.ui.importMenu3"
+               label="Jena"
+               path="additions">
+            <separator
+                  name="group3">
+            </separator>
+         </menu>
+         <action
+               class="org.johnstonshome.jenatool.ui.popup.actions.ImportRdfFileAction"
+               enablesFor="1"
+               id="org.johnstonshome.jenatool.ui.importAction3"
+               label="Quick Import"
+               icon="icons/import_wiz.gif"
+               menubarPath="org.johnstonshome.jenatool.ui.importMenu3/group3">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="org.johnstonshome.jenatool.ui.importContribution4"
+            objectClass="org.eclipse.core.resources.IFile">
+		 <visibility>
+		 	   <objectState name="contentTypeId"
+		          value="org.johnstonshome.jenatool.contenttypes.rdf" />
+		 </visibility>
+         <menu
+               id="org.johnstonshome.jenatool.ui.importMenu4"
+               label="Jena"
+               path="additions">
+            <separator
+                  name="group4">
+            </separator>
+         </menu>
+         <action
+               class="org.johnstonshome.jenatool.ui.popup.actions.ImportRdfFileAction"
+               enablesFor="1"
+               id="org.johnstonshome.jenatool.ui.importAction4"
+               label="Quick Import"
+               icon="icons/import_wiz.gif"
+               menubarPath="org.johnstonshome.jenatool.ui.importMenu4/group4">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.johnstonshome.jenatool.ui"
+            name="Jena">
+      </category>
+      <view
+            category="org.johnstonshome.jenatool.ui"
+            class="org.johnstonshome.jenatool.ui.views.JenaExplorerView"
+            icon="icons/jena_explorer_view.gif"
+            id="org.johnstonshome.jenatool.ui.views.JenaExplorerView"
+            name="Jena Explorer">
+      </view>
+      <view
+            category="org.johnstonshome.jenatool.ui"
+            class="org.johnstonshome.jenatool.ui.views.SparqlResultsView"
+            icon="icons/sparql_results_view.gif"
+            id="org.johnstonshome.jenatool.ui.views.SparqlResultsView"
+            name="SPARQL Results">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.johnstonshome.jenatool.ui.jenaPerspective">
+         <view
+               id="org.johnstonshome.jenatool.ui.views.JenaExplorerView"
+               ratio="0.5"
+               relationship="left"
+               relative="org.eclipse.ui.views.TaskList">
+         </view>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.johnstonshome.jenatool.ui.jenaPerspective">
+         <view
+               id="org.johnstonshome.jenatool.ui.views.SparqlResultsView"
+               ratio="0.5"
+               relationship="bottom"
+               relative="org.eclipse.ui.views.TaskList">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="Jena"
+            icon="icons/jena_perspective.gif"
+            class="org.johnstonshome.jenatool.ui.perspective.JenaPerspective"
+            id="org.johnstonshome.jenatool.ui.jenaPerspective">
+      </perspective>         
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.johnstonshome.jenatool.ui.wizards"
+            name="Jena">
+      </category>
+      <wizard
+            category="org.johnstonshome.jenatool.ui.wizards"
+            class="org.johnstonshome.jenatool.ui.wizards.NewRdfFileWizard"
+            icon="icons/rdf_file.gif"
+            id="org.johnstonshome.jenatool.ui.wizards.NewRdfFileWizard"
+            name="New RDF/XML File">
+      </wizard>
+      <wizard
+            category="org.johnstonshome.jenatool.ui.wizards"
+            class="org.johnstonshome.jenatool.ui.wizards.NewSparqlFileWizard"
+            icon="icons/sparql_file.gif"
+            id="org.johnstonshome.jenatool.ui.wizards.NewSparqlFileWizard"
+            name="New SPARQL Query">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="org.johnstonshome.jenatool.ui.importWizards.jenaCategory"
+            name="Jena">
+      </category>
+      <wizard
+            category="org.johnstonshome.jenatool.ui.importWizards.jenaCategory"
+            class="org.johnstonshome.jenatool.ui.importWizards.RdfImportImportWizard"
+            icon="icons/rdf_file.gif"
+            id="org.johnstonshome.jenatool.ui.importWizards.RdfImportImportWizard"
+            name="Import RDF Content">
+         <description>
+            Import RDF content from a URL into a Jena Dataset.
+         </description>
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.johnstonshome.jenatool.ui.preferences.JenaToolPreferencePage"
+            id="org.johnstonshome.jenatool.ui.preferences.JenaToolPreferencePage"
+            name="Jena">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.johnstonshome.jenatool.ui.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+</plugin>
