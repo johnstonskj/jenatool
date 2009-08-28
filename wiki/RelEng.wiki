@@ -1,0 +1,28 @@
+#summary Release procedures (reminders and gotchas).
+
+= Introduction =
+
+Release engineering shouldn't be hard, and indeed isn't, but if it's not documented it *will* go wrong one day.
+
+== Create Tag ==
+
+{{{
+svn copy https://jenatool.googlecode.com/svn/trunk/ https://jenatool.googlecode.com/svn/tags/{version} -m "Declaring {version} release"
+}}}
+
+
+== Create Update Site ==
+
+To create/install a build to the update site.
+
+  # Open site.xml
+  # Run the "Build All" command to create all the necessary artifacts
+  # Open the S3 bucket at http://jenatool.s3.amazonaws.com/
+  # Copy the following files *only* to the S3 bucket:
+    * features/*
+    * plugins/*
+    * site.xml
+  # Specifically, do not copy artifacts.xml and content.xml.
+  # Zip up the same contents as were copied to S3 and name them:
+    * org.johnstonshome.jenatool.<release>.zip
+  # Add the zip file to the Google Code project Downloads.
