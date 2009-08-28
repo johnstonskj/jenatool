@@ -26,3 +26,7 @@ To create/install a build to the update site.
   # Zip up the same contents as were copied to S3 and name them:
     * `org.johnstonshome.jenatool.{version}.zip`
   # Add the zip file to the Google Code project Downloads.
+
+== Update Project Plan ==
+
+Ensure the ProjectPlan is updated to denote the changes in this release, mark the release _complete_ and identify the next release as _current_. Ensure any outstanding issues targeted at this release are pushed forward.
