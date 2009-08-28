@@ -264,7 +264,8 @@
    <extension
          point="org.eclipse.help.contexts">
       <contexts
-            file="help/contexts.xml">
+            file="contexts.xml"
+            plugin="org.johnstonshome.jenatool.help">
       </contexts>
    </extension>
    <extension

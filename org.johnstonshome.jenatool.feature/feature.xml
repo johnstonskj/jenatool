@@ -2,7 +2,7 @@
 <feature
       id="org.johnstonshome.jenatool.feature"
       label="JenaTool Core UI"
-      version="0.9.1.qualifier"
+      version="0.9.2.qualifier"
       provider-name="Simon Johnston">
 
    <description url="http://code.google.com/p/jenatool/">
@@ -52,5 +52,11 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="org.johnstonshome.jenatool.help"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>
