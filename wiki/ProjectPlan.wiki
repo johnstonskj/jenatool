@@ -25,17 +25,22 @@ The major theme for this release will be the additional support for SDB and RDB 
 
 *Issues* [http://code.google.com/p/jenatool/issues/list?can=1&q=label%3AMilestone-Release0.9.3 Run this query to see issues targeted at this release].
 
-== Release 0.9.2 (planned) ==
+== Release 0.9.2 (current) ==
 
 *Theme*
 This is aimed as a usability release, additional features and specifically those aimed at streamlining common user actions and existing features will be included here. 
 
 *Issues* [http://code.google.com/p/jenatool/issues/list?can=1&q=label%3AMilestone-Release0.9.2 Run this query to see issues targeted at this release].
 
-== Release 0.9.1 (planned) ==
+== Release 0.9.1 (complete) ==
 
 *Theme*
 This is aimed as a stabilization release, to finish off all the features introduced in 0.9.0 and to focus on stability and usability. No new features will be introduced, but this release will include an Eclipse update site for the first time for users to download the release directly from inside their IDE.
+
+*Changes*
+  * The Run SPARQL query now has a dialog rather than running silently.
+  * The import dialog has had some work for usability.
+  * Changes to the Jena Explorer to keep connections open, but allow a close on-demand.
 
 *Issues* [http://code.google.com/p/jenatool/issues/list?can=1&q=label%3AMilestone-Release0.9.1 Run this query to see issues targeted at this release].
 
