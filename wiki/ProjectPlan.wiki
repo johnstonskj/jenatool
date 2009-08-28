@@ -42,7 +42,7 @@ This is aimed as a stabilization release, to finish off all the features introdu
   * The import dialog has had some work for usability.
   * Changes to the Jena Explorer to keep connections open, but allow a close on-demand.
 
-*Issues* [http://code.google.com/p/jenatool/issues/list?can=1&q=label%3AMilestone-Release0.9.1 Run this query to see issues targeted at this release].
+*Issues* [http://code.google.com/p/jenatool/issues/list?can=1&q=label%3AMilestone-Release0.9.1 Run this query to see issues completed in this release].
 
 == Release 0.9.0 (complete) ==
 
