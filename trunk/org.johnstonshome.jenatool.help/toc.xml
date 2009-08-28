@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="JenaTool Table of Contents">
+	<topic label="Getting Started"  href="html/gettingstarted.html" /> 
+	<topic label="Tasks" href="html/tasks.html">
+		<topic label="Managing Jena Store Connections"  href="html/connections.html"> 
+			<topic label="The Jena Explorer View" href="html/explorer.html"/> 
+		</topic>
+		<topic label="Managing RDF Content"  href="html/content.html"> 
+			<topic label="Importing RDF" href="html/import.html"/> 
+		</topic>
+		<topic label="Running SPARQL Queries"  href="html/sparql.html"> 
+			<topic label="The SPARQL Results View" href="html/results.html"/> 
+		</topic>
+	</topic>
+	<topic label="Reference">
+		<topic label="JenaTool Preferences"  href="html/preferences.html" /> 
+	</topic>
+</toc>
