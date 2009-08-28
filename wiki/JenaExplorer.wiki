@@ -5,7 +5,7 @@
 
 The Jena Explorer View is a key component of the Jena perspective in that it provides a persistent list of connections to Jena stores. In the image below you can see the Jena Explorer in the bottom left of the perspective showing two connections.
 
-http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/help/images/jt-perspective.png
+http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.help/html/images/jt-perspective.png
 
 == Actions ==
 
@@ -23,4 +23,4 @@ All connections added to the view are persisted so that the list will be remembe
 
 The following demonstrates the new connection wizard.
 
-http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/help/images/jt-new-connection.png
+http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.help/html/images/jt-new-connection.png
