@@ -22,6 +22,37 @@
 	<p>
 	  Please enter your text here.
 	</p>
+	<h3>Content Types</h3>
+
+	<table border="1" width="100%">
+	  <tr><th>Content Type</th><th>File Extension(s)</th><th>Eclipse Editor</th><th>Comments</th></tr>
+	  <tr><td>SPARQL</td><td>.sparql</td><td>text</td><td>A SPARQL query.</td></tr>
+	  <tr><td>N-Triples</td><td>.nt</td><td>text</td><td>RDF content in N-Triple format.</td></tr>
+	  <tr><td>Turtle</td><td>.ttl</td><td>text</td><td>RDF content in Turtle format.</td></tr>
+	  <tr><td>N3</td><td>.n3</td><td>text</td><td>RDF content in N3 format.</td></tr>
+	  <tr><td>RDF/XML</td><td>.rdf</td><td>xml</td><td>RDF content in RDF/XML format.</td></tr>
+	</table>
+	  
+	<h3>New Content Wizards</h3>
+	<p>
+  	  <img src="images/jt-new.png"/>
+  	</p>
+  	<p>
+	  <img src="images/jt-new-rdf.png"/>
+  	</p>
+  	<dl>
+      <dt>Container</dt><dd>the workspace container in which the resource will be created.</dd>
+	  <dt>File name</dt><dd>the name of the workspace resource to create.</dd>
+	  <dt>Subject URI</dt><dd>the URI to be the subject of the graph, can be left blank.</dd>
+  	</dl>
+  	<pre>
+&lt;?xml version="1.0"?&gt;
+&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;
+  &lt;rdf:Description rdf:about=""&gt;
+  &lt;/rdf:Description&gt;
+&lt;/rdf:RDF&gt;
+  	</pre>
   </body>
   
 </html>
