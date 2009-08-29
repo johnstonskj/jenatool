@@ -288,14 +288,27 @@
             class="org.johnstonshome.jenatool.ui.wizards.NewRdfFileWizard"
             icon="icons/rdf_file.gif"
             id="org.johnstonshome.jenatool.ui.wizards.NewRdfFileWizard"
+            finalPerspective="org.johnstonshome.jenatool.ui.jenaPerspective"
             name="New RDF/XML File">
+            <description>Create a new RDF/XML workspace resource.</description>
       </wizard>
       <wizard
             category="org.johnstonshome.jenatool.ui.wizards"
             class="org.johnstonshome.jenatool.ui.wizards.NewSparqlFileWizard"
             icon="icons/sparql_file.gif"
             id="org.johnstonshome.jenatool.ui.wizards.NewSparqlFileWizard"
+            finalPerspective="org.johnstonshome.jenatool.ui.jenaPerspective"
             name="New SPARQL Query">
+            <description>Create a new SPARQL query as a workspace resource.</description>
+      </wizard>
+      <wizard
+            category="org.johnstonshome.jenatool.ui.wizards"
+            class="org.johnstonshome.jenatool.ui.wizards.NewJenaProjectWizard"
+            icon="icons/prj_obj.gif"
+            id="org.johnstonshome.jenatool.ui.wizards.NewJenaProjectWizard"
+            finalPerspective="org.johnstonshome.jenatool.ui.jenaPerspective"
+            project="true"
+            name="New Jena Project">
       </wizard>
    </extension>
    <extension
