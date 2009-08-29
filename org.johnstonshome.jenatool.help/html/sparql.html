@@ -22,6 +22,45 @@
 	<p>
 	  Please enter your text here.
 	</p>
+	<h3>Creating SPARQL Queries</h3>
+	<p>
+  	  <img src="images/jt-new.png"/>
+  	</p>
+  	<p>
+	  <img src="images/jt-new-sparql.png"/>
+  	</p>
+  	<dl>
+      <dt>Container</dt><dd>the workspace container in which the resource will be created.</dd>
+	  <dt>File name</dt><dd>the name of the workspace resource to create.</dd>
+	  <dt>Query Form</dt><dd>the form of the SPARQL query to create, will select a template.</dd>
+  	</dl>
+  	<pre>
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt;
+SELECT ?value
+WHERE
+{
+  ?s &lt;http://example.org/v/some-predicate&gt; ?value
+}
+  	</pre>
+  	<h3>Running Queries</h3>
+  	<p>
+	  <img src="images/jt-run-query.png"/>
+  	</p>
+  	<dl>
+      <dt>Query Resource</dt><dd>the workspace resource containing the SPARQL query.</dd>
+	  <dt>Target Dataset</dt><dd>the dataset to execute the query against.</dd>
+	  <dt>Format</dt><dd>the format of the output of DESCRIBE and CONSTRUCT queries.</dd>
+	  <dt>Query Context</dt><dd>the model or models over which the query will execute.</dd>
+  	</dl>
+  	<p>
+	  <img src="images/jt-run-query-2.png"/>
+  	</p>
+	<p>
+	  <img src="images/jt-results-view.png"/>
+	</p>
   </body>
   
 </html>

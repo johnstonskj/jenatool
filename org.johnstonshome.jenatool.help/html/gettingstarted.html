@@ -20,8 +20,193 @@
 
     <h1>Getting Started</h1>
 	<p>
-	  Please enter your text here.
+	  JenaTool is a simple set of Eclipse tools that help developers work with Semantic 
+	  Web technologies including <a href="http://www.w3.org/RDF/">RDF</a> and 
+	  <a href="http://www.w3.org/TR/rdf-sparql-query/">SPARQL</a> specifically using the
+	  <a href="http://jena.sourceforge.net/">Jena Semantic Web Framework</a>. While some
+	  aspects of the tool are purely RDF/SPARQL, the implementation is entirely based on
+	  the Jena Framework. This only really surfaces in two areas, the manner in which the
+	  user connects to an RDF store is Jena specific and then setting the context for
+	  running a query.  
 	</p>
+	<p>
+	  The tool provides the following high-level features:
+	</p>
+	<ol>
+	  <li>An Eclipse perspective to organize the following views.</li>
+	  <li>The Jena Explorer View that manages connections to Jena semantic web stores.</li>
+	  <li>The SPARQL Results View that displays the output from queries.</li>
+	  <li>Content types and editor bindings for common RDF types and SPARQL query sources.</li>
+	  <li>New File wizards for RDF/XML and SPARQL content types.</li>
+	  <li>A context menu to execute SPARQL queries against Jena stores.</li>
+	  <li>Import wizard for common RDF types to populate Jena stores with test data.</li>
+	</ol>
+	<p>
+	  The following is a screenshot of Eclipse running with the Jena perspective open showing
+	  the standard Eclipse Navigator (top left), the Jena Explorer (bottom left), the SPARQL
+	  Results view along the bottom and the editor open with a SPARQL query. 
+	</p>
+  	<p>
+	  <img src="images/jt-perspective.png" height="50%"/>
+  	</p>
+  	<h3>Developing Semantic Web Applications</h3>
+  	<p>
+  	  For developers new to the technologies of the <a href="http://www.w3.org/2001/sw/">Semantic 
+  	  Web</a>, or <a href="http://linkeddata.org/">Linked Data</a> it can be difficult to get 
+  	  used to a new data model in RDF and a new query language in SPARQL. JenaTool is a simple
+  	  but useful set of tools to allow the user to experiment with these, develop queries, 
+  	  understand the performance of certain query forms and manage sets of queries and test data
+  	  in the same way they manage SQL queries, Java classes and test data in Eclipse - by 
+  	  making them workspace resources. Supporting custom content types for RDF content and 
+  	  SPARQL queries allows these to be added to existing projects and also be added to 
+  	  version control with the rest of the project resources.
+  	</p>
+  	<h3>A Simple Walk-Through</h3>
+  	<p>
+  	  Having installed JenaTool into your Eclipse install, the first step is either to add some
+  	  RDF or SPARQL resources to an existing project or create a new Jena project to contain
+  	  your resources. The decision over these two options really depends on your project 
+  	  organization and needs, and in many cases an application will include both, some resources
+  	  as part of application plugin projects and potentially separate projects containing nothing
+  	  but RDF and SPARQL resources. Let's assume for now we'll create a new Jena Project which 
+  	  will contain all the 
+  	</p>
+  	<blockquote>
+  	  <b>Step 1.</b><br/>
+  	  Select the <code>File->New->Project...</code> menu and review the <code>New Project</code>
+  	  wizard. Open the <code>Jena</code> category and select the <code>New Jena Project</code> 
+  	  option. All you have to do is choose a name for your project as usual in Eclipse and hit 
+  	  the <code>Finish</code> button.
+  	</blockquote>
+  	<blockquote>
+	  <img src="images/jt-new-project.png"/>
+  	</blockquote>
+  	<p>
+  	  Basically this is an empty project with some pre-defined folders for connection information,
+  	  RDF content resources, RDF vocabularies (RDF Schema, OWL) and finally SPARQL Queries.
+  	  However, these categories are useful at organizing resources and using the wizard ensures
+  	  consistency of projects as opposed to using arbitrary project and folder structures. Now, let's 
+  	  first create a sample RDF resource; you can use this as a template to create a number of 
+  	  others as additional test data later. 
+  	</p>
+  	<blockquote>
+  	  <b>Step 2.</b><br/>
+  	  Select the  <code>File->New->Other...</code> menu and review the <code>New</code>
+  	  wizard. Open the <code>Jena</code> category and select the <code>New RDF/XML File</code> 
+  	  option. Select the <code>content</code> folder in your new project for the container, 
+  	  enter a new name for the file if you wish and you can leave the subject URI blank and hit the 
+  	  <code>Finish</code> button.
+  	</blockquote>  	
+  	<blockquote>
+	  <img src="images/jt-new-rdf.png"/>
+  	</blockquote>
+  	<p>
+  	The generated RDF/XML is correct, and will be opened using the standard Eclipse XML editor.
+  	But, while it's correct it's not terribly interesting, so replace the content in your 
+  	editor with some more information at least, we'll use the example below in our examples.
+  	</p>
+  	<pre>
+&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"&gt;
+ &lt;foaf:Person rdf:about="https://jazz.net/people/simonj"&gt;
+   &lt;foaf:name&gt;Simon Johnston&lt;/foaf:name&gt;
+   &lt;foaf:firstName&gt;Simon&lt;/foaf:firstName&gt;
+   &lt;foaf:surname&gt;Johnston&lt;/foaf:surname&gt;
+   &lt;foaf:currentProject rdf:resource="http://jazz.net/projects/foundation"/&gt;
+   &lt;foaf:knows rdf:resource="http://example.org/People/david"/&gt;
+   &lt;foaf:knows rdf:resource="http://example.org/People/james"/&gt;
+ &lt;/foaf:Person&gt;
+&lt;/rdf:RDF&gt;
+  	</pre>
+  	<p>
+  	Now we need somewhere to store this RDF, and Jena has a number of persistent stores but
+  	currently only the TDB store is supported by JenaTool. So, we'll create a new Jena TDB
+  	store (Dataset) and then we'll add the RDF above to the store.
+  	</p>
+  	<blockquote>
+  	  <b>Step 3.</b><br/>
+  	  Ensure the Jena Explorer view is open (either select the Jena Perspective, or open the
+  	  view from the <code>Window->Show View->Other...</code> menu. Now, select the 
+  	  <code>Add New Connection</code> button from the view toolbar (or from the context menu 
+  	  by right-clicking on the <code>Jena Connections</code> folder in the view). Select a 
+  	  location for the new store, this has to be a directory not a file, then hit the
+  	  <code>Finish</code> button. If the location does not exist you'll be prompted to create
+  	  a new dataset at this location, accept this choice.
+  	</blockquote>  	
+  	<blockquote>
+	  <img src="images/jt-new-connection.png"/>
+  	</blockquote>
+    <p>
+      The connection will be created and added to the explorer view, so now we can add content
+      to this connection and run queries against the connection.
+    </p>
+  	<blockquote>
+  	  <b>Step 4.</b><br/>
+  	  Right click on the RDF resource we created in step 2 above, from the context menu
+  	  select the <code>Jena</code> menu and then the <code>Quick Import</code> action. The 
+  	  resulting dialog allows you to select the resource to import (which will be correctly
+  	  filled in), the target connection to add the resource to (which will be the one we
+  	  just created) and the format of the file (which should correctly be set to be 
+  	  <code>RDF/XML</code>. The final two text fields can be left blank for now, just hit
+  	  the <code>Finish</code> button.
+  	</blockquote>
+  	<blockquote>
+	  <img src="images/jt-import-rdf.png"/>
+  	</blockquote>
+  	<p>
+  	  The RDF triples contained in the resource we created will now be added to the default
+  	  graph in the store we just created. But, to be sure of this we need to be able to get
+  	  them back out of the store and to do that we need to run a query. The query itself is
+  	  pretty simply, but we need to create a SPARQL query resource and then execute it against
+  	  the same store.
+  	</p>
+  	<blockquote>
+  	  <b>Step 5.</b><br/>
+  	  Select the  <code>File->New->Other...</code> menu and review the <code>New</code>
+  	  wizard. Open the <code>Jena</code> category and select the <code>New SPARQL Query</code> 
+  	  option. Select the <code>query</code> folder in your new project for the container, 
+  	  enter a new name for the file if you wish and set the query form to be
+  	  <code>SELECT</code>. Now hit the <code>Finish</code> button.
+  	</blockquote>
+  	<blockquote>
+	  <img src="images/jt-new-sparql.png"/>
+  	</blockquote>
+  	<p>
+  	  The wizard not only creates a new SPARQL query resource in the project but it also 
+  	  adds in a template example as a starting point, this is useful as a reminder of the
+  	  general structure of a query lest we forget, but for now we can remove the content
+  	  generated by the wizard and replace it with the simple "select everything" query
+  	  shown in the example below. Now we're ready to run our query.
+  	</p>
+  	<pre>
+SELECT * WHERE { ?s ?p ?o }
+  	</pre>
+  	<blockquote>
+  	  <b>Step 6.</b><br/>
+  	  Right click on the SPARQL resource we created in step 5 above, from the context menu
+  	  select the <code>Jena</code> menu and then the <code>Run Query</code> action. The 
+  	  resulting dialog allows you to select the resource to run (which will be correctly
+  	  filled in) and the target connection to run the query against (which will be the one we
+  	  just created) The other options on the dialog can be ignore for now, just hit
+  	  the <code>Finish</code> button.
+  	</blockquote>
+  	<blockquote>
+	  <img src="images/jt-run-query-2.png"/>
+  	</blockquote>
+  	<p>
+  	  The query will run, and the results of the query will show in the SPARQL Results View,
+  	  as shown in the image below. As you can see the output is textual, the view does not 
+  	  use a table viewer as certain query forms such as DESCRIBE and CONSTRUCT do not return
+  	  tabular data. Also, new results are appended to the view, the user has to manually 
+  	  clear the view using the toolbar button.
+  	</p>
+  	<p>
+	  <img src="images/jt-run-query-3.png"/>
+  	</p>
+  	<h3>More Information</h3>
+  	<p>
+  	  <a href="http://code.google.com/p/jenatool">Home page at Google Code</a>
+  	</p>
   </body>
   
 </html>
