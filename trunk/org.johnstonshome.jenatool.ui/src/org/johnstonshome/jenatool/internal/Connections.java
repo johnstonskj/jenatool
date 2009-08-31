@@ -39,6 +39,9 @@ public class Connections {
 	}
 	
 	public static boolean remove(Connection oldConnection) {
+		if (oldConnection.isConnected()) {
+			oldConnection.disconnect();
+		}
 		return connections.remove(oldConnection);
 	}
 	
@@ -47,6 +50,9 @@ public class Connections {
 		for (Iterator<Connection> iterator = connections.iterator(); iterator.hasNext();) {
 			Connection conn = (Connection) iterator.next();
 			if (conn.toString().equals(name)) {
+				if (conn.isConnected()) {
+					conn.disconnect();
+				}
 				iterator.remove();
 				removed = true;
 			}

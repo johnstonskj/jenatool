@@ -38,10 +38,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 import org.johnstonshome.jenatool.internal.Connection;
 import org.johnstonshome.jenatool.internal.Connections;
+import org.johnstonshome.jenatool.internal.HelpUtils;
 import org.johnstonshome.jenatool.internal.ImageCache;
 import org.johnstonshome.jenatool.ui.Activator;
 import org.johnstonshome.jenatool.ui.wizards.NewConnectionWizard;
@@ -259,8 +259,8 @@ public class JenaExplorerView extends ViewPart {
 		 */
 		viewer.expandToLevel(4);
 
-		// Create the help context id for the viewer's control
-		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "org.johnstonshome.jenatool.ui.viewer");
+		HelpUtils.setHelp(viewer.getControl(), "explorerView");
+		
 		makeActions();
 		hookContextMenu();
 		hookDoubleClickAction();
@@ -342,7 +342,9 @@ public class JenaExplorerView extends ViewPart {
 						"Delete Connection", 
 						"Are you sure you want to delete the connection '" + selected.toString() + "'?");
 				if (yes) {
-					Connections.remove(((ConnectionTreeObject)selected).getConnection());
+					Connection conn = ((ConnectionTreeObject)selected).getConnection();
+					conn.disconnect();
+					Connections.remove(conn);
 					selected.getParent().removeChild(selected);
 					viewer.remove(selected);
 					viewer.refresh();

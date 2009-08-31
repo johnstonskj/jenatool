@@ -10,13 +10,13 @@ package org.johnstonshome.jenatool.ui.wizards;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
+import org.johnstonshome.jenatool.internal.FileUtils;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -72,14 +72,9 @@ public class NewJenaProjectWizard extends BasicNewProjectResourceWizard {
 	
 	private void doFinish(IProgressMonitor monitor) throws CoreException {
 		IProject project = getNewProject();
-		IFolder folder = null;
-		folder = project.getFolder("connections");
-		folder.create(true, true, monitor);
-		folder = project.getFolder("content");
-		folder.create(true, true, monitor);
-		folder = project.getFolder("queries");
-		folder.create(true, true, monitor);
-		folder = project.getFolder("vocabularies");
-		folder.create(true, true, monitor);
+		FileUtils.createFolder(project, "connections", monitor);
+		FileUtils.createFolder(project, "content", monitor);
+		FileUtils.createFolder(project, "queries", monitor);
+		FileUtils.createFolder(project, "vocabularies", monitor);
 	}
 }

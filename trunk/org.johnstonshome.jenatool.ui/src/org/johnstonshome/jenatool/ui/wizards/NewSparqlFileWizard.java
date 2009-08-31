@@ -8,20 +8,25 @@
  */
 package org.johnstonshome.jenatool.ui.wizards;
 
+import java.lang.reflect.InvocationTargetException;
+
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.core.runtime.*;
-import org.eclipse.jface.operation.*;
-import java.lang.reflect.InvocationTargetException;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.core.resources.*;
-import org.eclipse.core.runtime.CoreException;
-import java.io.*;
-import org.eclipse.ui.*;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWizard;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.johnstonshome.jenatool.internal.FileUtils;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -99,31 +104,10 @@ public class NewSparqlFileWizard extends Wizard implements INewWizard {
 	 * the editor on the newly created file.
 	 */
 
-	private void doFinish(
-		String containerName,
-		String fileName,
-		int queryForm,
-		IProgressMonitor monitor)
-		throws CoreException {
-		// create a sample file
+	private void doFinish(String containerName, String fileName, int queryForm, IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask("Creating " + fileName, 2);
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IResource resource = root.findMember(new Path(containerName));
-		if (!resource.exists() || !(resource instanceof IContainer)) {
-			throwCoreException("Container \"" + containerName + "\" does not exist.");
-		}
-		IContainer container = (IContainer) resource;
-		final IFile file = container.getFile(new Path(fileName));
-		try {
-			InputStream stream = openContentStream(queryForm);
-			if (file.exists()) {
-				file.setContents(stream, true, true, monitor);
-			} else {
-				file.create(stream, true, monitor);
-			}
-			stream.close();
-		} catch (IOException e) {
-		}
+		final IContainer container = FileUtils.getExistingContainerByPath(containerName);
+		final IFile file = FileUtils.createFile(container, fileName, getContents(queryForm), monitor);
 		monitor.worked(1);
 		monitor.setTaskName("Opening file for editing...");
 		getShell().getDisplay().asyncExec(new Runnable() {
@@ -139,11 +123,7 @@ public class NewSparqlFileWizard extends Wizard implements INewWizard {
 		monitor.worked(1);
 	}
 	
-	/**
-	 * We will initialize file contents with a sample text.
-	 */
-
-	private InputStream openContentStream(int queryForm) {
+	private String getContents(int queryForm) {
 		String contents = "";
 		switch (queryForm) {
 		case QUERY_FORM_SELECT:
@@ -189,13 +169,7 @@ public class NewSparqlFileWizard extends Wizard implements INewWizard {
 			contents = "DESCRIBE <http://example.org/subject>";
 			break;
 		}
-		return new ByteArrayInputStream(contents.getBytes());
-	}
-
-	private void throwCoreException(String message) throws CoreException {
-		IStatus status =
-			new Status(IStatus.ERROR, "org.johnstonshome.jenatool.ui", IStatus.OK, message, null);
-		throw new CoreException(status);
+		return contents;
 	}
 
 	/**

@@ -20,10 +20,29 @@
 
     <h2>Importing RDF</h2>
 	<p>
-	  Please enter your text here.
+	  It's important when developing and testing SPARQL queries to be able to
+	  do so against reasonable test data. While it would be possible to store, 
+	  and version, the actual Jena store itself this is impractical for a 
+	  number of reasons. For a start it isn't possible to edit the store in a
+	  simple way and it's not easy to produce deltas for a binary store. So
+	  JenaTool allows the developer to create and store test data in text 
+	  files in one of a number of representations (see <a href="content.html">
+	  RDF Content</a>) and import this data into a store.
+	</p>
+	<p>
+	  RDF content can be imported in one of two ways, the first is to right-click
+	  on an RDF resource in the workspace and select the <code>Jena->Quick Import
+	  </code> context action. The second, and Eclipse-centric way is to use the
+	  standard <code>File->Import...</code> menu and follow the usual process.
+	  The following shows the standard Eclipse import dialog with the new
+	  <code>Jena</code> category opened.
 	</p>
 	<p>
   	  <img src="images/jt-import.png"/>
+  	</p>
+  	<p>
+  	  Once you select the right import action you'll see the following RDF specific
+  	  dialog, the details of the fields are described below.
   	</p>
   	<p>
 	  <img src="images/jt-import-rdf.png"/>
