@@ -28,8 +28,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
+import org.johnstonshome.jenatool.internal.HelpUtils;
 import org.johnstonshome.jenatool.internal.SparqlRunner;
 import org.johnstonshome.jenatool.ui.Activator;
 import org.johnstonshome.jenatool.ui.preferences.PluginPreferences;
@@ -95,8 +95,8 @@ public class SparqlResultsView extends ViewPart implements IPropertyChangeListen
 		viewer.setDocument(contents);
 		updateFont(false);
 
-		// Create the help context id for the viewer's control
-		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "org.johnstonshome.jenatool.ui.viewer");
+		HelpUtils.setHelp(viewer.getControl(), "resultsView");
+
 		makeActions();
 		hookContextMenu();
 		contributeToActionBars();
