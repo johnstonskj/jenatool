@@ -1,0 +1,29 @@
+# Introduction #
+
+As a developer building semantic web tools, platforms and applications we chose to use Jena as our RDF framework. However, while the documentation for Jena is reasonably complete it would have been useful to have a simple and interactive environment to test queries, import and export content from a store and also so on. We built command line tools, JUnit tests and more to ensure we were able to write the queries we needed for our application.
+
+## Stories ##
+
+The following are short descriptions of use cases that motivate the features being developed for JenaTool.
+
+### Query development ###
+
+I'd like to be able to create a connection to a jena store, either SDB or TDB, interactively and be able to write queries and run them until they're perfected. To this end I'd like to keep a series of sample queries in resources in an Eclipse project and be able to reasonably easily execute these queries against one or more connections containing similar sample data. The ability to persist these queries as resources also allows me to take advantage of the team facilities of Eclipse and manage these test projects with my team.
+
+### Test data management ###
+
+In the same way I would like to manage test data as a series of RDF resources (in N-Triple, Turtle, N3 or RDF/XML form) and be able to import them into a connected store to run queries against. I should be able to manage these resources again in my Eclipse workspace but I want Eclipse to know they are RDF content and be able to present me meaningful actions based on this. For example I want to be able to easily import data in local resources without having to necessarily go through the usual Import UI and select the resources to import. However, the usual Import UI is useful in being able to import data external to my Eclipse workspace, by importing an RDF graph from a web URL for example.
+
+## Features ##
+
+  1. Jena Perspective - contains the Jena Explorer View and SPARQL Results View.
+  1. Jena Explorer View - to list and store connections to Jena repositories, currently only TDB is supported as a connection type.
+    1. Allows adding a new connection, deleting existing connections and marking connections as "default" for some actions.
+  1. SPARQL Results View - a text view that displays results from running SPARQL queries.
+    1. Will append results to the current output to allow aggregating results, also displays timings for queries.
+    1. Results view can be cleared
+  1. File Types - registered file types for SPARQL, N-Triples, Turtle, N3 and RDF/XML with associated editors.
+    1. SPARQL file type supports a context menu to run the query, using the default connection as a context.
+    1. RDF file types support a context menu to import the content into one of the connections.
+  1. Property Pages - configuration to denote the default behavior of the views:
+    1. For example, selecting the default output representation for DESCRIBE and CONSTRUCT query forms.

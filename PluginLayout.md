@@ -1,0 +1,16 @@
+# Introduction #
+
+This page describes the current set of plugins and Eclipse projects that make up the tool. The text also provides motivation for the current layout and possible optimizations for future work.
+
+## Current Layout ##
+
+The current layout consists of a single feature and a single UI plugin, as listed below.
+
+  * org.johnstonshome.jenatool.feature - The feature descriptor for the tool.
+  * org.johnstonshome.jenatool.ui - The user interface components for the tool.
+
+At this time the UI plugin also contains all the Jena runtime Jars, this is not an ideal situation but saved dealing with classpath issues while trying to get the first release in some way complete. The preferred solution would be to have a separate plugin for the Jena Jars that can be updated independently of the UI plugin (see [issue #3](http://code.google.com/p/jenatool/issues/detail?id=3)).
+
+## Deployment ##
+
+The project contains a single update site project that can be used to build the installable components. There is no plan for additional update sites or additional deployment configurations.

@@ -1,0 +1,58 @@
+# Introduction #
+
+This page gives an overview of the current and planned releases for the tool and targeted features.
+
+## Release 1.0.0 (planned) ##
+
+**Theme**
+The aim is to complete the vision for the tool as it stands today, this includes completion of all features but also includes help, documentation and so forth. Details of features for this release will be included as we get closer to release candidate status, the following are a list of known outstanding features and major work:
+
+  * More complete syntax-checking SPARQL editor.
+  * _Possible_ syntax-checking editors for N-Triples, Turtle and N3.
+  * A Query-by-example feature to build SPARQL queries.
+  * Support for SDB and potentially RDB backends.
+  * Support for Jena's code generation from OWL vocabularies.
+  * Pellet integration into query execution, as an option.
+
+**Issues** [Run this query to see issues targeted at this release](http://code.google.com/p/jenatool/issues/list?can=1&q=label%3AMilestone-Release1.0.0).
+
+## Release 0.9.3 (planned) ##
+
+**Theme**
+The major theme for this release will be the additional support for SDB and RDB stores in the Jena Explorer View.
+
+**Issues** [Run this query to see issues targeted at this release](http://code.google.com/p/jenatool/issues/list?can=1&q=label%3AMilestone-Release0.9.3).
+
+## Release 0.9.2 (current) ##
+
+**Theme**
+This is aimed as a usability release, additional features and specifically those aimed at streamlining common user actions and existing features will be included here.
+
+**Issues** [Run this query to see issues targeted at this release](http://code.google.com/p/jenatool/issues/list?can=1&q=label%3AMilestone-Release0.9.2).
+
+## Release 0.9.1 (complete) ##
+
+**Theme**
+This is aimed as a stabilization release, to finish off all the features introduced in 0.9.0 and to focus on stability and usability. No new features will be introduced, but this release will include an Eclipse update site for the first time for users to download the release directly from inside their IDE.
+
+**Changes**
+  * The Run SPARQL query now has a dialog rather than running silently.
+  * The import dialog has had some work for usability.
+  * Changes to the Jena Explorer to keep connections open, but allow a close on-demand.
+
+**Issues** [Run this query to see issues completed in this release](http://code.google.com/p/jenatool/issues/list?can=1&q=label%3AMilestone-Release0.9.1).
+
+## Release 0.9.0 (complete) ##
+
+**Theme**
+This is the first planned release and is intended only as a baseline from which to work from. However, certain features will be included in an initial (and probably buggy) form.
+
+**Features**
+  * There is a Jena perspective
+  * The Jena Explorer view is included but only supports TDB connections.
+  * The SPARQL Results view is included.
+  * File types, with icons, are included for RDF content and SPARQL queries, these have no customization of the editors however.
+    * SPARQL files support a "Run Query" context action in the navigator to execute.
+    * RDF content files support a "Quick Import" context action to add them to a connection.
+  * There are new file dialogs for RDF/XML files and SPARQL queries.
+  * There is an import action to add existing RDF content to a connection.

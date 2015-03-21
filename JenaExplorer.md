@@ -1,0 +1,24 @@
+# Introduction #
+
+The Jena Explorer View is a key component of the Jena perspective in that it provides a persistent list of connections to Jena stores. In the image below you can see the Jena Explorer in the bottom left of the perspective showing two connections.
+
+![http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.help/html/images/jt-perspective.png](http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.help/html/images/jt-perspective.png)
+
+## Actions ##
+
+The Jena Explorer View provides the following actions:
+
+|  **Button**  |  **On**  |  **Comments**  |
+|:-------------|:---------|:---------------|
+| ![http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/icons/connection_new.gif](http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/icons/connection_new.gif) | Toolbar, any tree item | Adds a new connection by invoking the new connection wizard. |
+| ![http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/icons/object_delete.gif](http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/icons/object_delete.gif) | Toolbar, any connection | Removes the selected connection from the view (does prompt before deletion). |
+| ![http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/icons/connection_edit.gif](http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.ui/icons/connection_edit.gif) | Toolbar, any connection | Sets the currently selected connection as the default for "quick" actions. |
+| N/A | Any connection | On double-clicking any connection some properties of the connection can be edited. |
+
+All connections added to the view are persisted so that the list will be remembered across Eclipse sessions. However, the default connection is not persisted, the user must select the default each time Eclipse is run anew.
+
+## New Connection Wizard ##
+
+The following demonstrates the new connection wizard.
+
+![http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.help/html/images/jt-new-connection.png](http://jenatool.googlecode.com/svn/trunk/org.johnstonshome.jenatool.help/html/images/jt-new-connection.png)
