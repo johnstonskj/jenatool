@@ -22,11 +22,9 @@ The following is a high level view of the features planned for !JenaTool, specif
 
 # Download
 
-There are three methods to retrieve the JenaTool Eclipse plugins:
-
 - Use the update site at <http://jenatool.s3.amazonaws.com/> to obtain the latest release.
-- Download one of the archived update sites - details TBD.
-- Checkout and build the sources yourself
+- Checkout from the commandline,
+- or download either the [master](https://github.com/johnstonskj/jenatool/archive/master.zip)) or a [release](https://github.com/johnstonskj/jenatool/releases) and build the sources yourself
 
 # Plan 
 
