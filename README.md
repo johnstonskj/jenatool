@@ -1,7 +1,9 @@
+![](https://raw.githubusercontent.com/johnstonskj/jenatool/master/org.johnstonshome.jenatool.ui/icons/jenatool-logo-small.png)
+
 # Introduction 
 
 JenaTool is a set of Eclipse UI extensions for helping developers
-work with RDF data and SPARQL queries using the [http://jena.sourceforge.net/documentation.html Jena Semantic Web Framework].
+work with RDF data and SPARQL queries using the [Jena Semantic Web Framework](http://jena.sourceforge.net/documentation.html).
 
 # Features
 
@@ -21,11 +23,11 @@ The following is a high level view of the features planned for !JenaTool, specif
 
 # Download
 
-There are three methods to retrieve the !JenaTool Eclipse plugins:
+There are three methods to retrieve the JenaTool Eclipse plugins:
 
-- Use the update site at http://jenatool.s3.amazonaws.com/ to obtain the latest release.
-- Download one of the archived update sites corresponding to each release on the [http://code.google.com/p/jenatool/downloads/list Downloads tab] above.
-- Checkout and build the sources yourself, see the [http://code.google.com/p/jenatool/source/checkout Source tab] for more details.
+- Use the update site at <http://jenatool.s3.amazonaws.com/> to obtain the latest release.
+- Download one of the archived update sites - details TBD.
+- Checkout and build the sources yourself
 
 # Plan 
 
